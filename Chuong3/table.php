@@ -32,7 +32,7 @@
         echo '</table>';
     ?>
     <h1>Table bằng PHP và HTLM</h1>
-    <table border="1">
+    <table border="1" cellpading="0">
         <?php for($i=0; $i<4; $i++): ?>
             <?php if(($i%2)==1): ?>
             <tr class="chan">
