@@ -15,7 +15,7 @@
         $sql = <<<EOT
         UPDATE hinhthucthanhtoan
         SET	httt_ten=N'$httt_ten'
-        WHERE	httt_ma='$httt_ma';
+        WHERE	httt_ma=$httt_ma;
 EOT;
         mysqli_query($conn, $sql);
     ?>
