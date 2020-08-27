@@ -10,7 +10,7 @@
     <h1>Thực thi lệnh DELETE</h1>
     <?php
         include_once(__DIR__ . '/../dbconnect.php');
-        $httt_ma = 9;
+        $httt_ma = 4;
         $sql = <<<EOT
         DELETE FROM hinhthucthanhtoan
         WHERE	httt_ma='$httt_ma';
