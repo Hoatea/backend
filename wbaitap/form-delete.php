@@ -19,7 +19,7 @@ EOT;
         $result = mysqli_query($conn, $sql);
         $data = [];
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $data[] = array(
+            $data = array(
                 'httt_ma' => $row['httt_ma'],
                 'httt_ten' => $row['httt_ten'],
             );
