@@ -16,10 +16,14 @@
             <div class="col-md-10 text-center">
                 <h1>INSERT</h1>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <table class="mx-auto">
+                    <table class="mx-auto text-left">
+                        <tr class="my-3">
+                            <td>Tên loại sản phẩm : </td>
+                            <td><input type="text" name="lsp_ten" id="lsp_ten" autofocus></td>
+                        </tr>
                         <tr>
-                            <td>Tên phương thức thanh toán : </td>
-                            <td><input type="text" name="httt_ten" id="httt_ten" autofocus></td>
+                            <td>Mô tả : </td>
+                            <td><textarea name="lsp_mota" id="lsp_mota" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="text-center py-3">
@@ -32,8 +36,9 @@
                 <?php
                     if(isset($_POST['btn_them'])){
                         include_once(__DIR__ . '/../../../dbconnect.php');
-                        $httt_ten=$_POST['httt_ten'];
-                        $sql = "INSERT INTO `hinhthucthanhtoan`(httt_ten) VALUES(N'{$httt_ten}');";
+                        $lsp_ten=$_POST['lsp_ten'];
+                        $lsp_mota=$_POST['lsp_mota'];
+                        $sql = "INSERT INTO `loaisanpham`(lsp_ten, lsp_mota) VALUES(N'{$lsp_ten}', N'{$lsp_mota}');";
                         mysqli_query($conn, $sql);
                     }
                 ?>

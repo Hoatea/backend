@@ -21,22 +21,27 @@
                 <h1>UPDATE</h1>
                 <?php
                     include_once(__DIR__ . '/../../../dbconnect.php');
-                    $httt_ma = $_GET['httt_ma'];
-                    $sql = " SELECT httt_ma,httt_ten FROM hinhthucthanhtoan WHERE httt_ma = $httt_ma;";
+                    $lsp_ma = $_GET['lsp_ma'];
+                    $sql = " SELECT lsp_ma, lsp_ten, lsp_mota FROM loaisanpham WHERE lsp_ma = $lsp_ma;";
                     $result = mysqli_query($conn, $sql);
                     $data = [];
                     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                         $data = array(
-                            'httt_ma' => $row['httt_ma'],
-                            'httt_ten' => $row['httt_ten'],
+                            'lsp_ma' => $row['lsp_ma'],
+                            'lsp_ten' => $row['lsp_ten'],
+                            'lsp_mota' => $row['lsp_mota'],
                         );
                     }
                 ?>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <table class="mx-auto">
+                    <table class="mx-auto text-left">
                         <tr>
-                            <td>Tên phương thức thanh toán : </td>
-                            <td><input type="text" name="httt_ten" id="httt_ten" value="<?= $data['httt_ten'] ?>" autofocus /></td>
+                            <td>Tên loại sản phẩm : </td>
+                            <td><input type="text" name="lsp_ten" id="lsp_ten" value="<?= $data['lsp_ten'] ?>" autofocus /></td>
+                        </tr>
+                        <tr>
+                            <td>Mô tả : </td>
+                            <td><textarea name="lsp_mota" id="lsp_mota" cols="30" rows="10"><?= $data['lsp_mota'] ?></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="text-center py-3">
@@ -48,8 +53,9 @@
                 </form>
                 <?php
                     if(isset($_POST['btn_sua'])){
-                        $httt_ten=$_POST['httt_ten'];
-                        $sql = "UPDATE hinhthucthanhtoan SET httt_ten=N'$httt_ten' WHERE httt_ma=$httt_ma;";
+                        $lsp_ten=$_POST['lsp_ten']; 
+                        $lsp_mota=$_POST['lsp_mota']; 
+                        $sql = "UPDATE loaisanpham SET lsp_ten=N'$lsp_ten', lsp_mota=N'$lsp_mota'  WHERE lsp_ma=$lsp_ma;";
                         mysqli_query($conn, $sql);
                     }
                 ?>

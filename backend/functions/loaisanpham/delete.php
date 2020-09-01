@@ -1,9 +1,9 @@
 <?php
     include_once(__DIR__ . '/../../../dbconnect.php');
-    $httt_ma = $_GET['httt_ma'];
+    $lsp_ma = $_GET['lsp_ma'];
     $sql = <<<EOT
-    DELETE FROM hinhthucthanhtoan
-    WHERE	httt_ma='$httt_ma';
+    DELETE FROM loaisanpham
+    WHERE lsp_ma = $lsp_ma;
 EOT;
     mysqli_query($conn, $sql);
 ?>
