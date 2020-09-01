@@ -81,7 +81,7 @@
     </div>
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
-    <!-- <script>
+    <script>
         $(document).ready(function(){
             $('#frm_insert').validate({
                 rules: {
@@ -116,6 +116,6 @@
                 }
             });
         });
-    </script> -->
+    </script>
 </body>
 </html>
