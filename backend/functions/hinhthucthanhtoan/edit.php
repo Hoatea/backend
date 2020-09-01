@@ -17,7 +17,7 @@
             <div class="col-md-2">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-10 text-center">
+            <div class="col-md-10">
                 <h1>UPDATE</h1>
                 <?php
                     include_once(__DIR__ . '/../../../dbconnect.php');
@@ -33,18 +33,12 @@
                     }
                 ?>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <table class="mx-auto">
-                        <tr>
-                            <td>Tên phương thức thanh toán : </td>
-                            <td><input type="text" name="httt_ten" id="httt_ten" value="<?= $data['httt_ten'] ?>" autofocus /></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-center py-3">
-                                <input class="btn btn-success" type="submit" value="Sửa" name="btn_sua">
-                                <a class="btn btn-success" href="index.php">Quay về</a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="form-group">
+                        <label for="httt_ten">Tên phương thức thanh toán : </label>
+                        <input type="text" class="form-control" id="httt_ten" name="httt_ten" value="<?= $data['httt_ten'] ?>">
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Sửa" name="btn_sua">
+                    <a class="btn btn-success" href="index.php">Quay về</a>
                 </form>
                 <?php
                     if(isset($_POST['btn_sua'])){
@@ -61,5 +55,41 @@
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
     <!-- End footer -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
+    <script>
+        $(document).ready(function(){
+            $('#frm_insert').validate({
+                rules: {
+                    httt_ten: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 50,
+                    },
+                },
+                messages: {
+                    httt_ten: {
+                        required: "Nhập tên hình thức thanh toán.",
+                        minlength: "Tên hình thức thanh toán phải có ít nhất 3 ký tự.",
+                        maxlength: "Tên hình thức thanh toán chỉ có nhiều nhất 50 ký tự.",
+                    },
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    error.addClass("invalid-feedback");
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                success: function(label, element) {},
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid"); 
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

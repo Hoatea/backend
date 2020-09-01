@@ -33,8 +33,8 @@
                         }
 
                     ?>
-                    <a href="create.php" class="btn btn-success my-3">Thêm mới</a>
-                    <table border="1" class="mx-auto">
+                    <a href="create.php" class="btn btn-success my-3">Add new</a>
+                    <table class="mx-auto table table-hover">
                         <thead>
                             <tr>
                                 <th>Mã Hình thức Thanh toán</th>
