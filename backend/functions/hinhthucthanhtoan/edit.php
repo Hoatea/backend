@@ -18,7 +18,7 @@
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
             <div class="col-md-10">
-                <h1>UPDATE</h1>
+                <h1 class="text-center">UPDATE</h1>
                 <?php
                     include_once(__DIR__ . '/../../../dbconnect.php');
                     $httt_ma = $_GET['httt_ma'];
@@ -33,13 +33,63 @@
                     }
                 ?>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <div class="form-group">
-                        <label for="httt_ten">Tên phương thức thanh toán : </label>
-                        <input type="text" class="form-control" id="httt_ten" name="httt_ten" value="<?= $data['httt_ten'] ?>">
+                    <div class="form-group row">
+                        <label for="httt_ten" class="col-lg-2 col-md-6 col-form-label">Tên phương thức thanh toán : </label>
+                        <div class="col-lg-10 col-md-6">
+                            <input type="text" class="form-control" id="httt_ten" name="httt_ten" value="<?= $data['httt_ten'] ?>">
+                        </div>
                     </div>
-                    <input class="btn btn-success" type="submit" value="Sửa" name="btn_sua">
-                    <a class="btn btn-success" href="index.php">Quay về</a>
+                    <div class="text-center">
+                        <input class="btn btn-dark" type="submit" value="Sửa" name="btn_sua">
+                        <a class="btn btn-dark" href="index.php">Quay về</a>
+                    </div>
                 </form>
+                <?php
+                    if(isset($_POST['btn_sua'])){
+                        $httt_ten=$_POST['httt_ten'];
+                        $errors = [];
+                        //Kiểm tra rỗng
+                        if(empty($httt_ten)){
+                            $errors['httt_ten'][] = array(
+                                'rule' => 'required',
+                                'rule_value' => true,
+                                'value' => $httt_ten,
+                                'msg' => 'Tên hình thức thanh toán không được để trống'
+                            );
+                        } else {
+                            if(strlen($httt_ten)<3){
+                                $errors['httt_ten'][] = array(
+                                    'rule' => 'minlength',
+                                    'rule_value' => 3,
+                                    'value' => $httt_ten,
+                                    'msg' => 'Tên hình thức thanh toán phải có ít nhất 3 ký tự'
+                                );
+                            }
+                            if(strlen($httt_ten)>50){
+                                $errors['httt_ten'][] = array(
+                                    'rule' => 'maxlength',
+                                    'rule_value' => 50,
+                                    'value' => $httt_ten,
+                                    'msg' => 'Tên hình thức thanh toán phải chỉ chứa 50 ký tự'
+                                );
+                            }  
+                        }
+                    }
+                ?>
+                <?php if(isset($_POST['btn_sua'])&&!empty($errors)):?>
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <ul>
+                        <?php foreach($errors as $field) : ?>
+                            <?php foreach($field as $rules) : ?>
+                                <li><?= $rules['msg']?></li>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php endif;?>
                 <?php
                     if(isset($_POST['btn_sua'])){
                         $httt_ten=$_POST['httt_ten'];

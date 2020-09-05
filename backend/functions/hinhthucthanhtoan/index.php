@@ -1,4 +1,4 @@
-<!-- Trang index của Back-end -->
+<!-- Trang index của Bảng hình thức thanh toán -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,20 +33,23 @@
                         }
 
                     ?>
-                    <a href="create.php" class="btn btn-success my-3">Add new</a>
+                    <a href="create.php" class="btn btn-dark my-3">Add new</a>
                     <table class="mx-auto table table-hover">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
+                                <th>#</th>
                                 <th>Mã Hình thức Thanh toán</th>
                                 <th>Tên Hình thức Thanh toán</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i=1 ?>
                             <?php foreach($data as $httt): ?>
                             <tr>
+                                <td><?= $i++ ?></td>
                                 <td><?= $httt['httt_ma']; ?></td>
-                                <td><?= $httt['httt_ten']; ?></td>
+                                <td class="font-weight-bold"><?= $httt['httt_ten']; ?></td>
                                 <td>
                                     <a href="delete.php?httt_ma=<?= $httt['httt_ma']; ?>">Delete</a> | 
                                     <a href="edit.php?httt_ma=<?= $httt['httt_ma']; ?>">Edit</a>

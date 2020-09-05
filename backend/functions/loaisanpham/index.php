@@ -36,10 +36,11 @@
                         }
 
                     ?>
-                    <a href="create.php" class="btn btn-success my-3">Add</a>
-                    <table border="1" class="mx-auto">
-                        <thead>
+                    <a class="btn btn-dark my-3" href="create.php">Add new</a>
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
                             <tr>
+                                <th>#</th>
                                 <th>Mã loại sản phẩm</th>
                                 <th>Tên loại sản phẩm</th>
                                 <th>Mô tả</th>
@@ -47,8 +48,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i=1; ?>
                             <?php foreach($data as $httt): ?>
                             <tr>
+                                <td><?= $i++; ?></td>
                                 <td><?= $httt['lsp_ma']; ?></td>
                                 <td><?= $httt['lsp_ten']; ?></td>
                                 <td><?= $httt['lsp_mota']; ?></td>

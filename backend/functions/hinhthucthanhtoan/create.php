@@ -14,21 +14,25 @@
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
             <div class="col-md-10">
-                <h1>INSERT</h1>
+                <h1 class="text-center">INSERT</h1>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <div class="form-group">
-                        <label for="httt_ten">Tên phương thức thanh toán : </label>
-                        <input type="text" class="form-control" id="httt_ten" name="httt_ten">
+                    <div class="form-group row">
+                        <label for="httt_ten" class="col-lg-2 col-md-6 col-form-label">Tên phương thức thanh toán : </label>
+                        <div class="col-lg-10 col-md-6">
+                            <input type="text" class="form-control" id="httt_ten" name="httt_ten">
+                        </div>
                     </div>
-                    <input class="btn btn-success" type="submit" value="Thêm" name="btn_them">
-                    <a class="btn btn-success" href="index.php">Quay về</a>
+                    <div class="text-center">
+                        <input class="btn btn-dark" type="submit" value="Thêm" name="btn_them">
+                        <a class="btn btn-dark" href="index.php">Quay về</a>
+                    </div>
                 </form>
                 <?php
                     if(isset($_POST['btn_them'])){
                         include_once(__DIR__ . '/../../../dbconnect.php');
                         $httt_ten=$_POST['httt_ten'];
                         $errors = [];
-                        //kiem tra rong
+                        //Kiểm tra rỗng
                         if(empty($httt_ten)){
                             $errors['httt_ten'][] = array(
                                 'rule' => 'required',
@@ -37,6 +41,7 @@
                                 'msg' => 'Vui lòng nhập tên hình thức thanh toán'
                             );
                         } else {
+                            //Kiểm tra < 3
                             if(strlen($httt_ten)<3){
                                 $errors['httt_ten'][] = array(
                                     'rule' => 'minlength',
@@ -45,6 +50,7 @@
                                     'msg' => 'Tên hình thức thanh toán phải có ít nhất 3 ký tự'
                                 );
                             }
+                            //Kiểm tra > 50
                             if(strlen($httt_ten)>50){
                                 $errors['httt_ten'][] = array(
                                     'rule' => 'maxlength',

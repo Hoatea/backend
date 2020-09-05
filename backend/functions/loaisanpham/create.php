@@ -13,25 +13,21 @@
             <div class="col-md-2">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-10 text-center">
-                <h1>INSERT</h1>
+            <div class="col-md-10">
+                <h1 class=" text-center">INSERT</h1>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <table class="mx-auto text-left">
-                        <tr class="my-3">
-                            <td>Tên loại sản phẩm : </td>
-                            <td><input type="text" name="lsp_ten" id="lsp_ten" autofocus></td>
-                        </tr>
-                        <tr>
-                            <td>Mô tả : </td>
-                            <td><textarea name="lsp_mota" id="lsp_mota" cols="30" rows="10"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-center py-3">
-                                <input class="btn btn-success" type="submit" value="Thêm" name="btn_them">
-                                <a class="btn btn-success" href="index.php">Quay về</a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="form-group">
+                        <label for="lsp_ten">Tên loại sản phẩm : </label>
+                        <input class="form-control" type="text" name="lsp_ten" id="lsp_ten">
+                    </div>
+                    <div class="form-group">
+                        <label for="lsp_mota">Mô tả : </label>
+                        <textarea class="form-control" name="lsp_mota" id="lsp_mota" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <input class="btn btn-dark" type="submit" value="Thêm" name="btn_them">
+                        <a class="btn btn-dark" href="index.php">Quay về</a>
+                    </div>
                 </form>
                 <?php
                     if(isset($_POST['btn_them'])){
@@ -47,5 +43,44 @@
     </div>
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
+    <script>
+        CKEDITOR.replace( 'lsp_mota' );
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#frm_insert').validate({
+                rules: {
+                    lsp_ten: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 50,
+                    },
+                }, 
+                messages: {
+                    lsp_ten: {
+                        required: "Nhập tên loại sản phẩm",
+                        minlenght: "Tên loại sản phẩm phải có ít nhất 3 ký tự",
+                        maxlenght: "Tên loại sản phẩm chỉ có tối đa 50 ký tự",
+                    },
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    error.addClass("invalid-feedback");
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                success: function(label, element) {},
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid"); 
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+        });
+    </script>
 </body>
 </html>

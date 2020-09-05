@@ -17,8 +17,8 @@
             <div class="col-md-2">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-10 text-center">
-                <h1>UPDATE</h1>
+            <div class="col-md-10">
+                <h1 class=" text-center">UPDATE</h1>
                 <?php
                     include_once(__DIR__ . '/../../../dbconnect.php');
                     $lsp_ma = $_GET['lsp_ma'];
@@ -34,22 +34,18 @@
                     }
                 ?>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
-                    <table class="mx-auto text-left">
-                        <tr>
-                            <td>Tên loại sản phẩm : </td>
-                            <td><input type="text" name="lsp_ten" id="lsp_ten" value="<?= $data['lsp_ten'] ?>" autofocus /></td>
-                        </tr>
-                        <tr>
-                            <td>Mô tả : </td>
-                            <td><textarea name="lsp_mota" id="lsp_mota" cols="30" rows="10"><?= $data['lsp_mota'] ?></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-center py-3">
-                                <input class="btn btn-success" type="submit" value="Sửa" name="btn_sua">
-                                <a class="btn btn-success" href="index.php">Quay về</a>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="form-group">
+                        <label for="lsp_ten">Tên loại sản phẩm : </label>
+                        <input class="form-control" type="text" name="lsp_ten" id="lsp_ten" value="<?= $data['lsp_ma']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="lsp_mota">Mô tả : </label>
+                        <textarea class="form-control" name="lsp_mota" id="lsp_mota" cols="30" rows="10"><?= $data['lsp_mota']?></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <input class="btn btn-dark" type="submit" value="Thêm" name="btn_them">
+                        <a class="btn btn-dark" href="index.php">Quay về</a>
+                    </div>
                 </form>
                 <?php
                     if(isset($_POST['btn_sua'])){
@@ -67,5 +63,8 @@
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
     <!-- End footer -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
+    <script>
+        CKEDITOR.replace( 'lsp_mota' );
+    </script>
 </body>
 </html>
