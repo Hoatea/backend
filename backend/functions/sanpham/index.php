@@ -6,6 +6,9 @@
     <title>Backend | Bảng sản phẩm</title>
     <!-- Chèn các file css -->
     <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
+    <link rel="stylesheet" href="/backend/assets/vendor/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="/backend/assets/vendor/DataTables/Buttons-1.6.3/css/buttons.bootstrap4.min.css">
+
 </head>
 <body>
     <!-- Header -->
@@ -63,16 +66,18 @@ EOT;
                 <div class="text-center">
                     <a href="create.php" class="btn btn-dark m-3">Thêm mới</a>
                 </div>
-                <table class="mx-auto table table-hover">
+                <table class="mx-auto table table-hover table-responsive table-striped" id="tbl">
                     <thead class="thead-dark text-center">
-                        <th>Mã sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá</th>
-                        <th>Giá cũ</th>
-                        <th>Loại sản phẩm</th>
-                        <th>Nhà sản xuất</th>
-                        <th>Khuyến mãi</th>
-                        <th>Action</th>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Giá cũ</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Nhà sản xuất</th>
+                            <th>Khuyến mãi</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php foreach($data as $value):?>
@@ -101,5 +106,21 @@ EOT;
     <!-- End footer -->
     <!-- Chèn các file js -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
+    <script src="/backend/assets/vendor/DataTables/datatables.min.js"></script>
+    <script src="/backend/assets/vendor/DataTables/Buttons-1.6.3/js/buttons.bootstrap4.min.js"></script>
+    <script src="/backend/assets/vendor/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="/backend/assets/vendor/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            swal("Hello world!");
+            $('#tbl').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ]
+            });
+        });
+    </script>
 </body>
 </html>
