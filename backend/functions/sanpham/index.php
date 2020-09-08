@@ -137,7 +137,7 @@ EOT;
                 });
             });
             $('#tbl').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                     'copy', 'excel', 'pdf'
                 ]
