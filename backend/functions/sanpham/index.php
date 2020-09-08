@@ -90,7 +90,7 @@ EOT;
                                 <td><?= $value['nsx_ten'] ?></td>
                                 <td><?= $value['km_tomtat'] ?></td>
                                 <td>
-                                    <a class="btn btn-danger" href="delete.php?sp_ma=<?=$value['sp_ma']?>">Xóa</a> 
+                                    <button class="btn btn-danger btnDelete" data-sp_ma="<?= $value['sp_ma'] ?>">Xóa</button>
                                     <a class="btn btn-success" href="edit.php?sp_ma=<?=$value['sp_ma']?>">Sửa</a>
                                 </td>
                             </tr>
@@ -113,7 +113,29 @@ EOT;
     <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function(){
-            swal("Hello world!");
+            $('.btnDelete').click(function(){
+                swal({
+                    title: "Bạn có chắc chắn muốn xóa?",
+                    text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) { // Nếu đồng ý xóa
+                    
+                        // 2. Lấy giá trị của thuộc tính (custom attribute HTML) 'sp_ma'
+                        // var sp_ma = $(this).attr('data-sp_ma');
+                        var sp_ma = $(this).data('sp_ma');
+                        var url = "delete.php?sp_ma=" + sp_ma;
+                        
+                        // Điều hướng qua trang xóa với REQUEST GET, có tham số sp_ma=...
+                        location.href = url;
+                    } else {
+                    swal("Hủy hành động", "Hành động xóa đã bị hủy", "info")
+                    }
+                });
+            });
             $('#tbl').DataTable({
                 dom: 'Bfrtip',
                 buttons: [

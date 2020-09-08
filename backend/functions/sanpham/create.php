@@ -155,7 +155,7 @@
         CKEDITOR.replace("sp_mota_chitiet");
     </script>
     <!-- Kiểm tra dữ liệu -->
-    <!-- <script>
+    <script>
         $(document).ready(function () {
             $('#frm_insert').validate({
                 rules: {
@@ -212,6 +212,6 @@
                 }
             });
         });
-    </script> -->
+    </script>
 </body>
 </html>
