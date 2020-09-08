@@ -31,7 +31,8 @@
                         FROM sanpham AS sp
                         JOIN loaisanpham AS lsp ON sp.lsp_ma = lsp.lsp_ma
                         JOIN nhasanxuat AS nsx ON sp.nsx_ma = nsx.nsx_ma
-                        LEFT JOIN khuyenmai AS km ON sp.km_ma = km.km_ma;
+                        LEFT JOIN khuyenmai AS km ON sp.km_ma = km.km_ma
+                        ORDER BY sp.sp_ma DESC;
 EOT;
                     $result = mysqli_query($conn, $sql);
                     $data = [];
@@ -46,12 +47,12 @@ EOT;
                         }
                         $giacu = '';
                         if(!empty($row['sp_giacu'])){
-                            $giacu = number_format($row['sp_giacu'],2,'.',',').' vnđ';
+                            $giacu = number_format($row['sp_giacu'],0,'.',',');
                         }
                         $data[] = array(
                             'sp_ma' => $row['sp_ma'],
                             'sp_ten' => $row['sp_ten'],
-                            'sp_gia' => number_format($row['sp_gia'],2,'.',',').' vnđ',
+                            'sp_gia' => number_format($row['sp_gia'],0,'.',','),
                             'sp_giacu' => $giacu,
                             'lsp_ten' => $row['lsp_ten'],
                             'nsx_ten' => $row['nsx_ten'],
@@ -63,7 +64,7 @@ EOT;
                     <a href="create.php" class="btn btn-dark m-3">Thêm mới</a>
                 </div>
                 <table class="mx-auto table table-hover">
-                    <thead class="thead-dark">
+                    <thead class="thead-dark text-center">
                         <th>Mã sản phẩm</th>
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
@@ -78,8 +79,8 @@ EOT;
                             <tr>
                                 <td><?= $value['sp_ma'] ?></td>
                                 <td><?= $value['sp_ten'] ?></td>
-                                <td><?= $value['sp_gia'] ?></td>
-                                <td><?= $value['sp_giacu'] ?></td>
+                                <td class="text-right"><?= $value['sp_gia'] ?></td>
+                                <td class="text-right"><?= $value['sp_giacu'] ?></td>
                                 <td><?= $value['lsp_ten'] ?></td>
                                 <td><?= $value['nsx_ten'] ?></td>
                                 <td><?= $value['km_tomtat'] ?></td>
