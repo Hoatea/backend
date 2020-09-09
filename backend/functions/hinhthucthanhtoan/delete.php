@@ -6,5 +6,5 @@
     WHERE	httt_ma='$httt_ma';
 EOT;
     mysqli_query($conn, $sql);
+    header('location:index.php');
 ?>
-Đã xóa <a href="index.php">Quay về</a>

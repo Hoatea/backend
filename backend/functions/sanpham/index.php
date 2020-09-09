@@ -6,9 +6,7 @@
     <title>Backend | Bảng sản phẩm</title>
     <!-- Chèn các file css -->
     <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
-    <link rel="stylesheet" href="/backend/assets/vendor/DataTables/datatables.min.css">
-    <link rel="stylesheet" href="/backend/assets/vendor/DataTables/Buttons-1.6.3/css/buttons.bootstrap4.min.css">
-
+    <?php include_once(__DIR__.'/../../layouts/style_data.php'); ?>
 </head>
 <body>
     <!-- Header -->
@@ -106,10 +104,7 @@ EOT;
     <!-- End footer -->
     <!-- Chèn các file js -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
-    <script src="/backend/assets/vendor/DataTables/datatables.min.js"></script>
-    <script src="/backend/assets/vendor/DataTables/Buttons-1.6.3/js/buttons.bootstrap4.min.js"></script>
-    <script src="/backend/assets/vendor/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="/backend/assets/vendor/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <?php include_once(__DIR__.'/../../layouts/script_data.php'); ?>
     <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -137,7 +132,7 @@ EOT;
                 });
             });
             $('#tbl').DataTable({
-                dom: 'Blfrtip',
+                dom:"<'row'<'col-md-12 text-center'B>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'
                 ]

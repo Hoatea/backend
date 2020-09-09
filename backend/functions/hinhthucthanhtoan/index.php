@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Backend | Chỉnh sửa bảng hình thức thanh toán</title>
     <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
+    <?php include_once(__DIR__.'/../../layouts/style_data.php'); ?>
 </head>
 <body>
     <!-- Header -->
@@ -17,8 +18,8 @@
             <div class="col-md-2">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-10 text-center">
-                <h1>DELETE | EDIT</h1>
+            <div class="col-md-10">
+                <h1 class="text-center">DELETE | EDIT</h1>
                     <?php
                         include_once(__DIR__ . '/../../../dbconnect.php');
 
@@ -33,8 +34,10 @@
                         }
 
                     ?>
-                    <a href="create.php" class="btn btn-dark my-3">Add new</a>
-                    <table class="mx-auto table table-hover">
+                    <div class="text-center">
+                        <a href="create.php" class="btn btn-dark my-3">Add new</a>
+                    </div>
+                    <table class="mx-auto table table-hover table-striped" name="tbl" id="tbl">
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
@@ -51,8 +54,8 @@
                                 <td><?= $httt['httt_ma']; ?></td>
                                 <td class="font-weight-bold"><?= $httt['httt_ten']; ?></td>
                                 <td>
-                                    <a href="delete.php?httt_ma=<?= $httt['httt_ma']; ?>">Delete</a> | 
-                                    <a href="edit.php?httt_ma=<?= $httt['httt_ma']; ?>">Edit</a>
+                                    <button class="btn btn-danger btnDelete" data-httt_ma="<?= $httt['httt_ma'] ?>">Delete</button>
+                                    <a class="btn btn-success" href="edit.php?httt_ma=<?= $httt['httt_ma']; ?>">Edit</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -66,5 +69,38 @@
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
     <!-- End footer -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
+    <?php include_once(__DIR__.'/../../layouts/script_data.php'); ?>
+    <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.btnDelete').click(function(){
+                swal({
+                    title: "Bạn có chắc chắn muốn xóa?",
+                    text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        debugger;
+                        var httt_ma = $(this).data('httt_ma');
+                        var url = "delete.php?httt_ma=" + httt_ma;
+                        location.href = url;
+                    } else {
+                    swal("Hủy hành động", "Hành động xóa đã bị hủy", "info")
+                    }
+                });
+            });
+            $('#tbl').DataTable({
+                // dom: 'Blfrtip',
+
+                dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ]
+            });
+        });
+    </script>
 </body>
 </html>

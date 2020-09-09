@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <input type="submit" value="Thêm mới" name="btn_insert" class="btn btn-dark">
+                                    <input id="btn_insert" type="submit" value="Thêm mới" name="btn_insert" class="btn btn-dark">
                                     <a href="index.php" class="btn btn-dark">Trở về</a>
                                 </div>
                             </form>
@@ -155,6 +155,7 @@
         CKEDITOR.replace("sp_mota_chitiet");
     </script>
     <!-- Kiểm tra dữ liệu -->
+    <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#frm_insert').validate({
