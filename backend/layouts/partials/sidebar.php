@@ -87,6 +87,21 @@
         </ul>
       </li>
       <!-- End Menu Khuyến mãi -->
+      <!-- Menu Hình sản phẩm -->
+      <li class="nav-item">
+        <a href="#hsp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          Hình sản phẩm
+        </a>
+        <ul class="collapse" id="hsp">
+          <li class="nav-item">
+            <a href="/backend/backend/functions/hinhsanpham/index.php">Danh sách</a>
+          </li>
+          <li class="nav-item">
+            <a href="/backend/backend/functions/hinhsanpham/create.php">Thêm mới</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Menu Hình sản phẩm -->
       <!-- #################### End Menu chức năng Danh mục #################### -->
     </ul>
   </div>
