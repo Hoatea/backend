@@ -72,6 +72,21 @@
         </ul>
       </li>
       <!-- End Menu Sản phẩm -->
+      <!-- Menu Khuyến mãi -->
+      <li class="nav-item">
+        <a href="#km" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          Khuyến mãi
+        </a>
+        <ul class="collapse" id="km">
+          <li class="nav-item">
+            <a href="/backend/backend/functions/khuyenmai/index.php">Danh sách</a>
+          </li>
+          <li class="nav-item">
+            <a href="/backend/backend/functions/khuyenmai/create.php">Thêm mới</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Menu Khuyến mãi -->
       <!-- #################### End Menu chức năng Danh mục #################### -->
     </ul>
   </div>
