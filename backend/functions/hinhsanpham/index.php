@@ -54,7 +54,7 @@ EOT;
                 <div class="text-center">
                     <a href="create.php" class="btn btn-dark m-3">Thêm mới</a>
                 </div>
-                <table class="mx-auto table table-hover table-striped" id="tbl">
+                <table class="mx-auto table table-hover table-striped text-center" id="tbl">
                     <thead class="thead-dark text-center">
                         <tr>
                             <th>Mã Hình Sản phẩm</th>
@@ -66,12 +66,12 @@ EOT;
                     <tbody>
                         <?php foreach($data as $value):?>
                             <tr>
-                                <td><?= $value['hsp_ma'] ?></td>
+                                <td class="align-middle"><?= $value['hsp_ma'] ?></td>
                                 <td>
                                     <img src="/backend/assets/uploads/products/<?= $value['hsp_tentaptin'] ?>" alt="<?= $value['hsp_tentaptin'] ?>" class="img-fluid" width="100px">
                                 </td>
-                                <td><?= $value['sp_tomtat'] ?></td>
-                                <td>
+                                <td class="align-middle"><?= $value['sp_tomtat'] ?></td>
+                                <td class="align-middle">
                                     <button class="btn btn-danger btnDelete" data-hsp_ma="<?= $value['hsp_ma'] ?>">Xóa</button>
                                     <a class="btn btn-success" href="edit.php?hsp_ma=<?=$value['hsp_ma']?>">Sửa</a>
                                 </td>

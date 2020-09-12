@@ -72,7 +72,7 @@
                                 $sql = "INSERT INTO `hinhsanpham` (hsp_tentaptin, sp_ma) VALUES ('$tentaptin', $sp_ma);"; 
                                 mysqli_query($conn, $sql); 
                                 mysqli_close($conn);
-                                // echo '<script>location.href = "index.php";</script>';
+                                echo '<script>location.href = "index.php";</script>';
                             }
                         }
                     }
@@ -97,11 +97,11 @@
         const fileInput = document.getElementById("hsp_tentaptin");
         const img = document.getElementById("preview-img");
         reader.onload = e => {
-        img.src = e.target.result;
+            img.src = e.target.result;
         }
         fileInput.addEventListener('change', e => {
-        const f = e.target.files[0];
-        reader.readAsDataURL(f);
+            const f = e.target.files[0];
+            reader.readAsDataURL(f);
         })
     </script>
 </body>

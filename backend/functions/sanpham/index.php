@@ -21,7 +21,7 @@
             <!-- End sidebar -->
             <!-- Content -->
             <div class="col-md-10">
-                <h1 class="text-center">Bảng sản phẩm</h1>
+                <h1 class="text-center">Sản phẩm</h1>
                 <?php 
                     include_once(__DIR__ . '/../../../dbconnect.php'); 
                     $sql = <<<EOT
@@ -62,9 +62,9 @@ EOT;
                     }
                 ?>
                 <div class="text-center">
-                    <a href="create.php" class="btn btn-dark m-3">Thêm mới</a>
+                    <a href="create.php" class="btn btn-dark my-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                 </div>
-                <table class="mx-auto table table-hover table-responsive table-striped" id="tbl">
+                <table class="table table-hover table-striped text-center table-responsive-sm" id="tbl">
                     <thead class="thead-dark text-center">
                         <tr>
                             <th>Mã sản phẩm</th>
@@ -87,9 +87,9 @@ EOT;
                                 <td><?= $value['lsp_ten'] ?></td>
                                 <td><?= $value['nsx_ten'] ?></td>
                                 <td><?= $value['km_tomtat'] ?></td>
-                                <td>
-                                    <button class="btn btn-danger btnDelete" data-sp_ma="<?= $value['sp_ma'] ?>">Xóa</button>
-                                    <a class="btn btn-success" href="edit.php?sp_ma=<?=$value['sp_ma']?>">Sửa</a>
+                                <td class="align-middle">
+                                    <button class="btn btn-danger btnDelete" data-sp_ma="<?= $value['sp_ma'] ?>" data-sp_ten="<?= $value['sp_ten'] ?>" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <a class="btn btn-success" href="edit.php?sp_ma=<?= $value['sp_ma']; ?>" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -108,31 +108,34 @@ EOT;
     <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
             $('.btnDelete').click(function(){
+                var temp = $(this).data('sp_ten');
                 swal({
-                    title: "Bạn có chắc chắn muốn xóa?",
+                    title: "Bạn muốn xóa " + temp,
                     text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
                     icon: "warning",
-                    buttons: true,
+                    buttons: ["Hủy","Xóa"],
                     dangerMode: true,
                 })
                 .then((willDelete) => {
-                    if (willDelete) { // Nếu đồng ý xóa
-                    
-                        // 2. Lấy giá trị của thuộc tính (custom attribute HTML) 'sp_ma'
-                        // var sp_ma = $(this).attr('data-sp_ma');
+                    if (willDelete) {
                         var sp_ma = $(this).data('sp_ma');
                         var url = "delete.php?sp_ma=" + sp_ma;
-                        
-                        // Điều hướng qua trang xóa với REQUEST GET, có tham số sp_ma=...
                         location.href = url;
                     } else {
-                    swal("Hủy hành động", "Hành động xóa đã bị hủy", "info")
+                        swal({
+                            title: "Đã hủy hành động xóa",
+                            button: 'Đã hiểu',
+                            icon: 'info',
+                        });
                     }
                 });
             });
             $('#tbl').DataTable({
-                dom:"<'row'<'col-md-12 text-center'B>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'
                 ]

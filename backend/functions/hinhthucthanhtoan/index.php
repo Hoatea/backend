@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backend | Chỉnh sửa bảng hình thức thanh toán</title>
+    <title>Backend | Bảng hình thức thanh toán</title>
     <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
     <?php include_once(__DIR__.'/../../layouts/style_data.php'); ?>
 </head>
@@ -15,11 +15,11 @@
     <!-- Container -->
     <div class="container-fluid my-5">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-10">
-                <h1 class="text-center">DELETE | EDIT</h1>
+            <div class="col-md-9">
+                <h1 class="text-center">Hình thức thanh toán</h1>
                     <?php
                         include_once(__DIR__ . '/../../../dbconnect.php');
 
@@ -35,27 +35,27 @@
 
                     ?>
                     <div class="text-center">
-                        <a href="create.php" class="btn btn-dark my-3">Add new</a>
+                        <a href="create.php" class="btn btn-dark my-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                     </div>
-                    <table class="mx-auto table table-hover table-striped" name="tbl" id="tbl">
+                    <table class="table table-hover table-striped text-center table-responsive-sm" name="tbl" id="tbl">
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
                                 <th>Mã Hình thức Thanh toán</th>
                                 <th>Tên Hình thức Thanh toán</th>
-                                <th>Action</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i=1 ?>
                             <?php foreach($data as $httt): ?>
                             <tr>
-                                <td><?= $i++ ?></td>
-                                <td><?= $httt['httt_ma']; ?></td>
-                                <td class="font-weight-bold"><?= $httt['httt_ten']; ?></td>
-                                <td>
-                                    <button class="btn btn-danger btnDelete" data-httt_ma="<?= $httt['httt_ma'] ?>">Delete</button>
-                                    <a class="btn btn-success" href="edit.php?httt_ma=<?= $httt['httt_ma']; ?>">Edit</a>
+                                <td class="align-middle"><?= $i++ ?></td>
+                                <td class="align-middle"><?= $httt['httt_ma']; ?></td>
+                                <td class="font-weight-bold align-middle"><?= $httt['httt_ten']; ?></td>
+                                <td class="align-middle">
+                                    <button class="btn btn-danger btnDelete" data-httt_ma="<?= $httt['httt_ma'] ?>" data-httt_ten="<?= $httt['httt_ten'] ?>" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <a class="btn btn-success" href="edit.php?httt_ma=<?= $httt['httt_ma']; ?>" data-toggle="tooltip" data-placement="top" title="Sửa"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -64,6 +64,7 @@
                     </div>
         </div>
     </div>
+
     <!-- End container -->
     <!-- Footer -->
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
@@ -73,28 +74,33 @@
     <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
             $('.btnDelete').click(function(){
+                var temp = $(this).data('httt_ten');
                 swal({
-                    title: "Bạn có chắc chắn muốn xóa?",
+                    title: "Bạn muốn xóa " + temp,
                     text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
                     icon: "warning",
-                    buttons: true,
+                    buttons: ["Hủy","Xóa"],
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        debugger;
                         var httt_ma = $(this).data('httt_ma');
                         var url = "delete.php?httt_ma=" + httt_ma;
                         location.href = url;
                     } else {
-                    swal("Hủy hành động", "Hành động xóa đã bị hủy", "info")
+                        swal({
+                            title: "Đã hủy hành động xóa",
+                            button: 'Đã hiểu',
+                            icon: 'info',
+                        });
                     }
                 });
             });
             $('#tbl').DataTable({
-                // dom: 'Blfrtip',
-
                 dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'

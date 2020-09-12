@@ -1,4 +1,4 @@
-<nav class="col-md-2 d-none d-md-block sidebar">
+<nav class="d-none d-md-block sidebar bg-light h-100 p-2">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <!-- #################### Menu các trang Quản lý #################### -->
@@ -27,6 +27,21 @@
         </ul>
       </li>
       <!-- End Menu Hình thức thanh toán -->
+      <!-- Menu Khách hàng -->
+      <li class="nav-item">
+        <a href="#kh" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          Khách hàng
+        </a>
+        <ul class="collapse" id="kh">
+          <li class="nav-item">
+            <a href="/backend/backend/functions/khachhang/index.php">Danh sách</a>
+          </li>
+          <li class="nav-item">
+            <a href="/backend/backend/functions/khachhang/create.php">Thêm mới</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Menu Khách hàng -->
       <!-- Menu Loại sản phẩm -->
       <li class="nav-item">
         <a href="#lsp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

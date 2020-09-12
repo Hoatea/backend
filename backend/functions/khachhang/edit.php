@@ -1,35 +1,51 @@
+<!-- Trang index của Back-end -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backend | Thêm mới bảng hình thức thanh toán</title>
+    <title>Backend | Update bảng hình thức thanh toán</title>
     <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
 </head>
 <body>
+    <!-- Header -->
     <?php include_once(__DIR__.'/../../layouts/partials/header.php'); ?>
+    <!-- End header -->
+    <!-- Container -->
     <div class="container-fluid my-5">
         <div class="row">
             <div class="col-md-2">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
             <div class="col-md-10">
-                <h1 class="text-center">INSERT</h1>
+                <h1 class="text-center">UPDATE</h1>
+                <?php
+                    include_once(__DIR__ . '/../../../dbconnect.php');
+                    $httt_ma = $_GET['httt_ma'];
+                    $sql = " SELECT httt_ma,httt_ten FROM hinhthucthanhtoan WHERE httt_ma = $httt_ma;";
+                    $result = mysqli_query($conn, $sql);
+                    $data = [];
+                    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                        $data = array(
+                            'httt_ma' => $row['httt_ma'],
+                            'httt_ten' => $row['httt_ten'],
+                        );
+                    }
+                ?>
                 <form action="" method="POST" name="frm_insert" id="frm_insert">
                     <div class="form-group row">
                         <label for="httt_ten" class="col-lg-2 col-md-6 col-form-label">Tên phương thức thanh toán : </label>
                         <div class="col-lg-10 col-md-6">
-                            <input type="text" class="form-control" id="httt_ten" name="httt_ten">
+                            <input type="text" class="form-control" id="httt_ten" name="httt_ten" value="<?= $data['httt_ten'] ?>">
                         </div>
                     </div>
                     <div class="text-center">
-                        <input class="btn btn-dark" type="submit" value="Thêm" name="btn_them">
+                        <input class="btn btn-dark" type="submit" value="Sửa" name="btn_sua">
                         <a class="btn btn-dark" href="index.php">Quay về</a>
                     </div>
                 </form>
                 <?php
-                    if(isset($_POST['btn_them'])){
-                        include_once(__DIR__ . '/../../../dbconnect.php');
+                    if(isset($_POST['btn_sua'])){
                         $httt_ten=$_POST['httt_ten'];
                         $errors = [];
                         //Kiểm tra rỗng
@@ -38,10 +54,9 @@
                                 'rule' => 'required',
                                 'rule_value' => true,
                                 'value' => $httt_ten,
-                                'msg' => 'Vui lòng nhập tên hình thức thanh toán'
+                                'msg' => 'Tên hình thức thanh toán không được để trống'
                             );
                         } else {
-                            //Kiểm tra < 3
                             if(strlen($httt_ten)<3){
                                 $errors['httt_ten'][] = array(
                                     'rule' => 'minlength',
@@ -50,20 +65,19 @@
                                     'msg' => 'Tên hình thức thanh toán phải có ít nhất 3 ký tự'
                                 );
                             }
-                            //Kiểm tra > 50
                             if(strlen($httt_ten)>50){
                                 $errors['httt_ten'][] = array(
                                     'rule' => 'maxlength',
                                     'rule_value' => 50,
                                     'value' => $httt_ten,
-                                    'msg' => 'Tên hình thức thanh toán không được vượt quá 50 ký tự'
+                                    'msg' => 'Tên hình thức thanh toán phải chỉ chứa 50 ký tự'
                                 );
-                            }
+                            }  
                         }
                     }
                 ?>
-                <?php if(isset($_POST['btn_them'])&&!empty($errors)) : ?>
-                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <?php if(isset($_POST['btn_sua'])&&!empty($errors)):?>
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                     <ul>
                         <?php foreach($errors as $field) : ?>
                             <?php foreach($field as $rules) : ?>
@@ -75,18 +89,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?php endif; ?>
+                <?php endif;?>
                 <?php
-                    if(isset($_POST['btn_them']) && (!isset($errors) || (empty($errors)))){
-                        $sql = "INSERT INTO `hinhthucthanhtoan`(httt_ten) VALUES(N'{$httt_ten}');";
+                    if(isset($_POST['btn_sua'])){
+                        $httt_ten=$_POST['httt_ten'];
+                        $sql = "UPDATE hinhthucthanhtoan SET httt_ten=N'$httt_ten' WHERE httt_ma=$httt_ma;";
                         mysqli_query($conn, $sql);
-                        mysqli_close($conn);
                     }
                 ?>
             </div>
         </div>
     </div>
+    <!-- End container -->
+    <!-- Footer -->
     <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
+    <!-- End footer -->
     <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
     <script>
         $(document).ready(function(){
@@ -101,8 +118,8 @@
                 messages: {
                     httt_ten: {
                         required: "Nhập tên hình thức thanh toán.",
-                        minlength: "Tên hình thức thanh toán phải có ít nhất 3 ký tự",
-                        maxlength: "Tên hình thức thanh toán chỉ có nhiều nhất 50 ký tự",
+                        minlength: "Tên hình thức thanh toán phải có ít nhất 3 ký tự.",
+                        maxlength: "Tên hình thức thanh toán chỉ có nhiều nhất 50 ký tự.",
                     },
                 },
                 errorElement: "em",
