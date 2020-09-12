@@ -1,3 +1,11 @@
+<?php
+// hàm `session_id()` sẽ trả về giá trị SESSION_ID (tên file session do Web Server tự động tạo)
+// - Nếu trả về Rỗng hoặc NULL => chưa có file Session tồn tại
+if (session_id() === '') {
+    // Yêu cầu Web Server tạo file Session để lưu trữ giá trị tương ứng với CLIENT (Web Browser đang gởi Request)
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +20,8 @@
         <div class="row">
             <?php include_once(__DIR__.'/../layouts/partials/sidebar.php'); ?>
             <div class="col-md-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, dignissimos aliquid illum sit voluptates est consequatur quos voluptatum, doloremque earum velit explicabo illo, odit in inventore ipsam sint quam autem. <br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque magnam dolore tempora dolores sunt obcaecati doloribus eaque alias nam veritatis, voluptas, voluptatum odit vel, molestiae quis porro distinctio consectetur esse repellendus expedita possimus ad non voluptatem? Enim magnam, modi culpa cupiditate cum labore atque, perferendis, et tempore inventore voluptatem quia repellendus mollitia officia cumque hic id eligendi voluptatum praesentium dolores doloremque. Doloribus ratione quia, earum vero non excepturi? Mollitia sequi esse rerum ex atque eveniet laborum, voluptas vero explicabo molestiae, doloremque assumenda voluptates nobis aliquam non exercitationem eos. Dolore modi accusantium placeat! Nemo magni officiis fugiat. Libero vero non architecto?</div>
-        </div>
+            <h1>Chào <?= $_SESSION['kh_tendangnhap_logged']; ?></h1>
+            </div>
     </div>
     <?php include_once(__DIR__.'/../layouts/partials/footer.php'); ?>
     <?php include_once(__DIR__.'/../layouts/scripts.php'); ?>
