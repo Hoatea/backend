@@ -63,7 +63,7 @@
                     <div class="text-center">
                         <a href="create.php" class="btn btn-dark my-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
                     </div>
-                    <table class="table table-hover table-striped text-center table-responsive-sm" name="tbl" id="tbl">
+                    <table class="table table-hover table-striped text-center table-responsive" name="tbl" id="tbl">
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
