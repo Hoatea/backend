@@ -68,7 +68,7 @@ if (session_id() === '') {
                     </div>
                     <div class="row">
                         <!-- Biểu đồ thống kê loại sản phẩm -->
-                        <div class="col-sm-6 col-lg-6">
+                        <div class="col-sm-12 col-lg-12">
                         <canvas id="chartOfobjChartThongKeLoaiSanPham"></canvas>
                         <button class="btn btn-outline-primary btn-sm form-control" id="refreshThongKeLoaiSanPham">Refresh dữ liệu</button>
                         </div><!-- col -->
@@ -172,8 +172,8 @@ if (session_id() === '') {
                         labels: myLabels,
                         datasets: [{
                             data: myData,
-                            borderColor: "#9ad0f5",
-                            backgroundColor: "#9ad0f5",
+                            borderColor: "#9ad0ff",
+                            backgroundColor: "#3e95cd",
                             borderWidth: 1
                         }]
                     },
