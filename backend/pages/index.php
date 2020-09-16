@@ -16,9 +16,12 @@ if (session_id() === '') {
 </head>
 <body>
     <?php include_once(__DIR__.'/../layouts/partials/header.php'); ?>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-2 col-md-3 p-0">
+                <?php include_once(__DIR__.'/../layouts/partials/sidebar.php'); ?>
+            </div>
+            <div class="col-md-10 col-md-9 my-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
