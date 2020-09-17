@@ -117,6 +117,21 @@
         </ul>
       </li>
       <!-- End Menu Hình sản phẩm -->
+      <!-- Menu Hình sản phẩm -->
+      <li class="nav-item">
+        <a href="#ddh" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          Đơn đặt hàng
+        </a>
+        <ul class="collapse" id="ddh">
+          <li class="nav-item">
+            <a href="/backend/backend/functions/dondathang/index.php">Danh sách</a>
+          </li>
+          <li class="nav-item">
+            <a href="/backend/backend/functions/dondathang/create.php">Thêm mới</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Menu Hình sản phẩm -->
       <!-- #################### End Menu chức năng Danh mục #################### -->
     </ul>
   </div>
