@@ -89,7 +89,7 @@ if (session_id() === '') {
                     $kh_tomtat = sprintf(
                         "Họ tên %s, số điện thoại: %s",
                         $rowKhachHang['kh_ten'],
-                        $rowKhachHang['kh_dienthoai'],
+                        $rowKhachHang['kh_dienthoai']
                     );
 
                     $dataKhachHang[] = array(
