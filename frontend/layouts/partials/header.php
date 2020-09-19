@@ -11,6 +11,10 @@
       <li class="nav-item active">
         <a class="nav-link" href="/backend/frontend/pages/contact.php">Liên hệ</a>
       </li>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/backend/frontend/pages/about.php">Chúng tôi</a>
+      </li>
     </ul>
 
     <ul class="navbar-nav px-3 ml-auto">
