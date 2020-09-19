@@ -1,29 +1,31 @@
 <!-- Trang index của Bảng hình thức thanh toán -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Backend | Bảng đơn đặt hàng</title>
-    <?php include_once(__DIR__.'/../../layouts/styles.php'); ?>
-    <?php include_once(__DIR__.'/../../layouts/style_data.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/styles.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/style_data.php'); ?>
 </head>
+
 <body>
     <!-- Header -->
-    <?php include_once(__DIR__.'/../../layouts/partials/header.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/partials/header.php'); ?>
     <!-- End header -->
     <!-- Container -->
-    <div class="container-fluid my-5">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-lg-2">
-                <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
+            <div class="col-md-3 col-lg-2 p-0">
+                <?php include_once(__DIR__ . '/../../layouts/partials/sidebar.php'); ?>
             </div>
-            <div class="col-md-9 col-lg-10">
+            <div class="col-md-9 col-lg-10 my-5">
                 <h1 class="text-center">Đơn đặt hàng</h1>
-                    <?php
-                        include_once(__DIR__ . '/../../../dbconnect.php');
+                <?php
+                include_once(__DIR__ . '/../../../dbconnect.php');
 
-                        $sql =  $sql = <<<EOT
+                $sql =  $sql = <<<EOT
                         SELECT 
                             ddh.dh_ma, ddh.dh_ngaylap, ddh.dh_ngaygiao, ddh.dh_noigiao, ddh.dh_trangthaithanhtoan, httt.httt_ten, kh.kh_ten, kh.kh_dienthoai
                             , SUM(spddh.sp_dh_soluong * spddh.sp_dh_dongia) AS TongThanhTien
@@ -33,43 +35,43 @@
                         JOIN `hinhthucthanhtoan` httt ON ddh.httt_ma = httt.httt_ma
                         GROUP BY ddh.dh_ma, ddh.dh_ngaylap, ddh.dh_ngaygiao, ddh.dh_noigiao, ddh.dh_trangthaithanhtoan, httt.httt_ten, kh.kh_ten, kh.kh_dienthoai
 EOT;
-                    
-                        $result = mysqli_query($conn, $sql);
-                        $data = [];
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                            $data[] = array(
-                                'dh_ma' => $row['dh_ma'],
-                                'dh_ngaylap' => date('d/m/Y', strtotime($row['dh_ngaylap'])),
-                                'dh_ngaygiao' => empty($row['dh_ngaygiao']) ? '' : date('d/m/Y', strtotime($row['dh_ngaygiao'])),
-                                'dh_noigiao' => $row['dh_noigiao'],
-                                'dh_trangthaithanhtoan' => $row['dh_trangthaithanhtoan'],
-                                'httt_ten' => $row['httt_ten'],
-                                'kh_ten' => $row['kh_ten'],
-                                'kh_dienthoai' => $row['kh_dienthoai'],
-                                'TongThanhTien' => number_format($row['TongThanhTien'], 2, ".", ",") . ' vnđ',
-                            );
-                        }
 
-                    ?>
-                    <div class="text-center">
-                        <a href="create.php" class="btn btn-dark my-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
-                    </div>
-                    <table class="table table-hover table-striped text-center table-responsive-sm" name="tbl" id="tbl">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Mã Đơn đặt hàng</th>
-                                <th>Khách hàng</th>
-                                <th>Ngày lập</th>
-                                <th>Ngày giao</th>
-                                <th>Nơi giao</th>
-                                <th>Hình thức thanh toán</th>
-                                <th>Tổng thành tiền</th>
-                                <th>Trạng thái thanh toán</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($data as $dondathang): ?>
+                $result = mysqli_query($conn, $sql);
+                $data = [];
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    $data[] = array(
+                        'dh_ma' => $row['dh_ma'],
+                        'dh_ngaylap' => date('d/m/Y', strtotime($row['dh_ngaylap'])),
+                        'dh_ngaygiao' => empty($row['dh_ngaygiao']) ? '' : date('d/m/Y', strtotime($row['dh_ngaygiao'])),
+                        'dh_noigiao' => $row['dh_noigiao'],
+                        'dh_trangthaithanhtoan' => $row['dh_trangthaithanhtoan'],
+                        'httt_ten' => $row['httt_ten'],
+                        'kh_ten' => $row['kh_ten'],
+                        'kh_dienthoai' => $row['kh_dienthoai'],
+                        'TongThanhTien' => number_format($row['TongThanhTien'], 2, ".", ",") . ' vnđ',
+                    );
+                }
+
+                ?>
+                <div class="text-center">
+                    <a href="create.php" class="btn btn-dark my-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Thêm mới</a>
+                </div>
+                <table class="table table-hover table-striped text-center table-responsive-sm" name="tbl" id="tbl">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Mã Đơn đặt hàng</th>
+                            <th>Khách hàng</th>
+                            <th>Ngày lập</th>
+                            <th>Ngày giao</th>
+                            <th>Nơi giao</th>
+                            <th>Hình thức thanh toán</th>
+                            <th>Tổng thành tiền</th>
+                            <th>Trạng thái thanh toán</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data as $dondathang) : ?>
                             <tr>
                                 <td><?= $dondathang['dh_ma'] ?></td>
                                 <td><b><?= $dondathang['kh_ten'] ?></b><br />(<?= $dondathang['kh_dienthoai'] ?>)</td>
@@ -107,51 +109,60 @@ EOT;
                                     <?php endif; ?>
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    </div>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <!-- End container -->
     <!-- Footer -->
-    <?php include_once(__DIR__.'/../../layouts/partials/footer.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/partials/footer.php'); ?>
     <!-- End footer -->
-    <?php include_once(__DIR__.'/../../layouts/scripts.php'); ?>
-    <?php include_once(__DIR__.'/../../layouts/script_data.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/scripts.php'); ?>
+    <?php include_once(__DIR__ . '/../../layouts/script_data.php'); ?>
     <script src="/backend/assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('.btnDelete').click(function(){
+        $(document).ready(function() {
+            $('.btnDelete').click(function() {
                 swal({
-                    title: "Bạn muốn xóa",
-                    text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
-                    icon: "warning",
-                    buttons: ["Hủy","Xóa"],
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        var dh_ma = $(this).data('dh_ma');
-                        var url = "delete.php?dh_ma=" + dh_ma;
-                        location.href = url;
-                    } else {
-                        swal({
-                            title: "Đã hủy hành động xóa",
-                            button: 'Đã hiểu',
-                            icon: 'info',
-                        });
-                    }
-                });
+                        title: "Bạn muốn xóa",
+                        text: "dữ liệu sẽ không thể phục hồi sau khi xóa.",
+                        icon: "warning",
+                        buttons: ["Hủy", "Xóa"],
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var dh_ma = $(this).data('dh_ma');
+                            var url = "delete.php?dh_ma=" + dh_ma;
+                            location.href = url;
+                        } else {
+                            swal({
+                                title: "Đã hủy hành động xóa",
+                                button: 'Đã hiểu',
+                                icon: 'info',
+                            });
+                        }
+                    });
             });
-            $('#tbl').DataTable({
+            var table = $('#tbl').DataTable({
                 dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'
-                ]
+                ],
+                language: {
+                    "url": "../../../assets/vendor/DataTables/Vietnamese.json",
+                    buttons: {
+                        "copy": "Sao chép",
+                        "excel": "Xuất ra file Excel",
+                        "pdf": "Xuất ra file PDF",
+                    }
+                }
             });
         });
     </script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-<nav class="d-none d-md-block sidebar bg-light h-100 p-2">
+<nav class="d-none d-md-block sidebar bg-light h-100 p-2" id="my-nav">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <!-- #################### Menu các trang Quản lý #################### -->

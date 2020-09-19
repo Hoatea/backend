@@ -107,11 +107,19 @@ EOT;
                     }
                 });
             });
-            $('#tbl').DataTable({
-                dom:"<'row'<'col-md-12 text-center'B>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            var table = $('#tbl').DataTable({
+                dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'
-                ]
+                ],
+                language: {
+                    "url": "../../../assets/vendor/DataTables/Vietnamese.json",
+                    buttons: {
+                        "copy": "Sao chép",
+                        "excel": "Xuất ra file Excel",
+                        "pdf": "Xuất ra file PDF",
+                    }
+                }
             });
         });
     </script>

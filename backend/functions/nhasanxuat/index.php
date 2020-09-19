@@ -12,15 +12,15 @@
     <!-- Header -->
     <?php include_once(__DIR__.'/../../layouts/partials/header.php'); ?>
     <!-- End header -->
-    <div class="container-fluid my-5">
+    <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3">
+            <div class="col-md-3 col-lg-2 p-0">
                 <?php include_once(__DIR__.'/../../layouts/partials/sidebar.php'); ?>
             </div>
             <!-- End sidebar -->
             <!-- Content -->
-            <div class="col-md-9">
+            <div class="col-md-9 col-lg-10 my-5">
                 <h1 class="text-center">Bảng nhà sản xuất</h1>
                 <?php 
                     include_once(__DIR__ . '/../../../dbconnect.php'); 
@@ -100,11 +100,19 @@
                     }
                 });
             });
-            $('#tbl').DataTable({
+            var table = $('#tbl').DataTable({
                 dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
                 buttons: [
                     'copy', 'excel', 'pdf'
-                ]
+                ],
+                language: {
+                    "url": "../../../assets/vendor/DataTables/Vietnamese.json",
+                    buttons: {
+                        "copy": "Sao chép",
+                        "excel": "Xuất ra file Excel",
+                        "pdf": "Xuất ra file PDF",
+                    }
+                }
             });
         });
     </script>

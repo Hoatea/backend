@@ -78,7 +78,7 @@ EOT;
     <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
     <!-- Each sheet element should have the class "sheet" -->
     <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <section class="sheet padding-10mm">
+    <section class="sheet padding-15mm" style="margin: auto;">
         <!-- Thông tin Cửa hàng -->
         <table border="0" width="100%" cellspacing="0">
             <tbody>
