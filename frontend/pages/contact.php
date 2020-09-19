@@ -87,7 +87,7 @@ if (session_id() === '') {
                 );
                 //Recipients
                 $mail->setFrom('tranvanhoa15042000@gmail.com', 'Mail Liên hệ');
-                $mail->addAddress('hoab1809127@student.ctu.edu.vn');               // Add a recipient
+                $mail->addAddress('tranvanhoa15042000@gmail.com');               // Add a recipient
                 $mail->addReplyTo($email);
                 // $mail->addCC('cc@example.com');
                 // $mail->addBCC('bcc@example.com');
@@ -103,10 +103,21 @@ if (session_id() === '') {
                 // - Chỉ nên sử dụng TABLE, TR, TD, và các định dạng cơ bản của CSS để thiết kế
                 // - Các đường link/hình ảnh có sử dụng trong mẫu thiết kế MAIL phải là đường dẫn WEB có thật, ví dụ như logo,banner,...
                 $body = <<<EOT
-    Có người liên hệ cần giúp đỡ. <br />
-    Email của khách: $email <br />
-    Nội dung: <br />
-    $message
+                <table border="0">
+                    <tr>
+                        <td colspan="2">
+                            <img src="https://www.freelogodesign.org/Content/img/logo-samples/flooop.png" alt="logo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Có người liên hệ cần giúp đỡ.</td>
+                        <td>
+                            Email của khách: $email <br />
+                            Nội dung: <br />
+                            $message
+                        </td>
+                    </tr>
+                </table>
 EOT;
                 $mail->Body    = $body;
                 $mail->send();
@@ -116,6 +127,7 @@ EOT;
         }
         ?>
         <!-- End block content -->
+        
     </main>
 
     <!-- footer -->
