@@ -94,6 +94,7 @@ EOT;
                 <input type="hidden" name="sp_gia" id="sp_gia" value="<?= $sanphamRow['sp_gia'] ?>" />
                 <input type="hidden" name="hinhdaidien" id="hinhdaidien" value="<?= empty($hinhsanphamdautien) ? '' : $hinhsanphamdautien['hsp_tentaptin'] ?>" />
                     <div class="col-md-6">
+                    <?php if(!empty($sanphamRow['danhsachhinhanh'])):?>
                         <?php foreach($sanphamRow['danhsachhinhanh'] as $hsp) : ?>
                             <div class="row">
                                 <div class="col">
@@ -101,6 +102,9 @@ EOT;
                                 </div>
                             </div>
                         <?php endforeach;?>
+                    <?php else: ?>
+                        <img src="/backend/assets/shared/img/img.png"> 
+                    <?php endif;?>
                     </div>
                     <div class="col-md-6">
                         Tên sản phẩm : <?= $sanphamRow['sp_ten'] ?> <br>
